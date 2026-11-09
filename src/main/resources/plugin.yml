@@ -1,0 +1,17 @@
+name: FartPlugin
+version: '1.0'
+main: hex.wald.fart.FartPlugin
+api-version: '1.21'
+
+commands:
+  fart:
+    description: Fart
+    usage: /fart [quiet|deep|mute|bind|reload]
+
+permissions:
+  fart.use:
+    description: Use the fart command and binds
+    default: true
+  fart.reload:
+    description: Reload FartPlugin settings
+    default: op

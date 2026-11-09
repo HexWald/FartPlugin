@@ -1,0 +1,29 @@
+# Default radius in blocks for sound, chat and smoke.
+radius: 10
+
+sound:
+  # radius: 10
+  volume: 1.0
+  pitch: 0.9
+  deep-pitch: 0.6
+  pitch-variation: 0.08
+
+quiet:
+  volume-multiplier: 0.35
+  radius-multiplier: 0.5
+
+# Seconds between farts, shared by all modes and binds.
+cooldown: 5
+
+cloud:
+  # radius: 10
+  enabled: true
+
+messages:
+  # radius: 10
+  fart: "&6%player% громко пёрнул!"
+  quiet: "&6%player% тихо пёрнул."
+  heard: "&eИгроков услышало: &6%count%"
+  cooldown: "&cПодожди ещё %time% сек."
+  muted: "&7Чужой пердёж скрыт."
+  unmuted: "&7Чужой пердёж снова слышно."
