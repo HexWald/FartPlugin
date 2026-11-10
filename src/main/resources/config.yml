@@ -22,6 +22,7 @@ cloud:
 mishap:
   # Percent chance per deep fart. Set to 0 to turn it off.
   chance: 5
+  item-name: "Shit"
 
 messages:
   # radius: 10

@@ -1,6 +1,6 @@
 package hex.wald.fart;
 
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -328,7 +328,8 @@ public class FartPlugin extends JavaPlugin implements Listener {
         }
 
         ItemStack wool = new ItemStack(Material.BROWN_WOOL);
-        wool.editMeta(meta -> meta.displayName(Component.text("Shit")));
+        String name = settings.getString("mishap.item-name", "Shit");
+        wool.editMeta(meta -> meta.displayName(LegacyComponentSerializer.legacyAmpersand().deserialize(name)));
         Location drop = FartCloud.behindPlayer(player, player.getLocation(), 0.08);
         return player.getWorld().dropItem(drop, wool, item ->
                 item.setVelocity(drop.getDirection().multiply(-0.16).setY(0.05))).isValid();
