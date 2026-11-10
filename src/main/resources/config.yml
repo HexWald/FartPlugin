@@ -19,6 +19,10 @@ cloud:
   # radius: 10
   enabled: true
 
+mishap:
+  # Percent chance per deep fart. Set to 0 to turn it off.
+  chance: 5
+
 messages:
   # radius: 10
   fart: "&6%player% громко пёрнул!"

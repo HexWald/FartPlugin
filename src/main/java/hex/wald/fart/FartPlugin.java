@@ -316,8 +316,14 @@ public class FartPlugin extends JavaPlugin implements Listener {
     }
 
     private boolean dropMishap(Player player) {
-        if (player.isDead() || player.getGameMode() == GameMode.SPECTATOR
-                || ThreadLocalRandom.current().nextDouble(100) >= 5) {
+        if (player.isDead() || player.getGameMode() == GameMode.SPECTATOR) {
+            return false;
+        }
+        if (!(settings.get("mishap.chance", 5) instanceof Number percent)) {
+            return false;
+        }
+        double chance = percent.doubleValue();
+        if (!(chance > 0 && chance <= 100) || ThreadLocalRandom.current().nextDouble(100) >= chance) {
             return false;
         }
 
