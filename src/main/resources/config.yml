@@ -32,3 +32,5 @@ messages:
   cooldown: "&cПодожди ещё %time% сек."
   muted: "&7Чужой пердёж скрыт."
   unmuted: "&7Чужой пердёж снова слышно."
+  mishap-self: "A mishap occurred"
+  mishap-nearby: "&7Looks like %player% sharted."

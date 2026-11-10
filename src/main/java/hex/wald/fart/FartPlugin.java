@@ -269,9 +269,7 @@ public class FartPlugin extends JavaPlugin implements Listener {
             return;
         }
 
-        if (mode == FartMode.DEEP) {
-            dropMishap(player);
-        }
+        boolean mishap = mode == FartMode.DEEP && dropMishap(player);
 
         boolean quiet = mode == FartMode.QUIET;
         double radius = number("radius", 10);
@@ -285,6 +283,12 @@ public class FartPlugin extends JavaPlugin implements Listener {
         float pitch = soundPitch(mode);
         Location origin = player.getLocation();
         String chat = message(quiet ? "quiet" : "fart").replace("%player%", player.getName());
+        if (mishap) {
+            String suffix = message("mishap-nearby").replace("%player%", player.getName());
+            if (!suffix.isBlank()) {
+                chat = chat.isBlank() ? suffix : chat + " " + suffix;
+            }
+        }
         List<Player> viewers = new ArrayList<>();
         int heard = 0;
 
@@ -310,6 +314,12 @@ public class FartPlugin extends JavaPlugin implements Listener {
         }
 
         player.sendMessage(message("heard").replace("%count%", Integer.toString(heard)));
+        if (mishap) {
+            String notice = message("mishap-self").replace("%player%", player.getName());
+            if (!notice.isBlank()) {
+                player.sendMessage(notice);
+            }
+        }
         if (!viewers.isEmpty()) {
             cloud.show(player, viewers, cloudRange, mode.particles);
         }
