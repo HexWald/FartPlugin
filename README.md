@@ -4,7 +4,7 @@
 
 Quiet farts leave less smoke. Deep farts leave more.
 
-Built for Paper 1.21 and Java 21. Run `mvn clean package`, put `target/fart-plugin-1.1.jar` in `plugins` and restart the server.
+Use JDK 25 and Maven to build against Paper 26.3. Put `target/fart-plugin-1.1.1.jar` in `plugins` and restart the server.
 
 ## Commands
 
