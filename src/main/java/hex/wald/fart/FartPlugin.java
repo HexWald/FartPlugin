@@ -1,7 +1,10 @@
 package hex.wald.fart;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -18,6 +21,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -265,6 +269,10 @@ public class FartPlugin extends JavaPlugin implements Listener {
             return;
         }
 
+        if (mode == FartMode.DEEP) {
+            dropMishap(player);
+        }
+
         boolean quiet = mode == FartMode.QUIET;
         double radius = number("radius", 10);
         double radiusMultiplier = quiet ? Math.min(1, number("quiet.radius-multiplier", 0.5)) : 1;
@@ -305,6 +313,19 @@ public class FartPlugin extends JavaPlugin implements Listener {
         if (!viewers.isEmpty()) {
             cloud.show(player, viewers, cloudRange, mode.particles);
         }
+    }
+
+    private boolean dropMishap(Player player) {
+        if (player.isDead() || player.getGameMode() == GameMode.SPECTATOR
+                || ThreadLocalRandom.current().nextDouble(100) >= 5) {
+            return false;
+        }
+
+        ItemStack wool = new ItemStack(Material.BROWN_WOOL);
+        wool.editMeta(meta -> meta.displayName(Component.text("Shit")));
+        Location drop = FartCloud.behindPlayer(player, player.getLocation(), 0.08);
+        return player.getWorld().dropItem(drop, wool, item ->
+                item.setVelocity(drop.getDirection().multiply(-0.16).setY(0.05))).isValid();
     }
 
     private float soundPitch(FartMode mode) {

@@ -41,10 +41,7 @@ final class FartCloud {
                 }
 
                 Location origin = player.getLocation();
-                Location smoke = origin.clone();
-                smoke.setPitch(0);
-                double distance = player.getWidth() * 0.7 + (PUFFS - puffs) * 0.07;
-                smoke.subtract(smoke.getDirection().multiply(distance)).add(0, player.getHeight() * 0.5, 0);
+                Location smoke = behindPlayer(player, origin, (PUFFS - puffs) * 0.07);
 
                 for (Player listener : listeners) {
                     if (!listener.isOnline() || !listener.getWorld().equals(world) || !plugin.canReceiveFart(listener, player)
@@ -62,6 +59,13 @@ final class FartCloud {
             }
         }.runTaskTimer(plugin, 0, 2);
         active.put(player.getUniqueId(), task);
+    }
+
+    static Location behindPlayer(Player player, Location origin, double extraDistance) {
+        Location behind = origin.clone();
+        behind.setPitch(0);
+        double distance = player.getWidth() * 0.7 + extraDistance;
+        return behind.subtract(behind.getDirection().multiply(distance)).add(0, player.getHeight() * 0.5, 0);
     }
 
     void stop(Player player) {
