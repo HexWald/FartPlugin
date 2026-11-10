@@ -26,7 +26,7 @@ final class FartCloud {
         this.plugin = plugin;
     }
 
-    void show(Player player, List<Player> listeners, double radiusSquared) {
+    void show(Player player, List<Player> listeners, double radiusSquared, int particles) {
         stop(player);
         World world = player.getWorld();
 
@@ -52,7 +52,7 @@ final class FartCloud {
                         continue;
                     }
 
-                    listener.spawnParticle(Particle.DUST_COLOR_TRANSITION, smoke, 3,
+                    listener.spawnParticle(Particle.DUST_COLOR_TRANSITION, smoke, particles,
                             0.08, 0.06, 0.08, 0, BROWN);
                 }
 
